@@ -1,5 +1,7 @@
 import React from 'react';
 import { ListGroup } from 'reactstrap';
+import Pagination from '../components/Pagination';
+
 import UserItem from '../components/User';
 
 const data = {
@@ -369,6 +371,7 @@ const data = {
 interface Props {}
 
 const Users = (props: Props) => {
+  const selectPage = (pageNumber: number): void => console.log(pageNumber);
   return (
     <div>
       <h2>Users</h2>
@@ -383,6 +386,12 @@ const Users = (props: Props) => {
           ></UserItem>
         ))}
       </ListGroup>
+
+      <Pagination
+        currentPage={data._meta.currentPage}
+        pageCount={data._meta.pageCount}
+        selectPage={selectPage}
+      />
     </div>
   );
 };
