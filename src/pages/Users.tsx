@@ -3,6 +3,7 @@ import { ListGroup } from 'reactstrap';
 import Pagination from '../components/Pagination';
 
 import UserItem from '../components/User';
+import Filter from '../components/Filter';
 
 const data = {
   _meta: {
@@ -372,9 +373,11 @@ interface Props {}
 
 const Users = (props: Props) => {
   const selectPage = (pageNumber: number): void => console.log(pageNumber);
+  const filterUsers = (filterText: string): void => console.log(filterText);
   return (
     <div>
       <h2>Users</h2>
+      <Filter onFilter={filterUsers} />
       <ListGroup>
         {data.result.map((user) => (
           <UserItem
