@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
   Redirect,
+  Link,
 } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import Users from './pages/Users';
@@ -15,7 +16,9 @@ function App() {
   return (
     <Container>
       <Router>
-        <h1>IBAR task</h1>
+        <h1>
+          <Link to="/">IBAR task</Link>
+        </h1>
         <hr />
         <Switch>
           <Route path="/" exact component={Users}></Route>

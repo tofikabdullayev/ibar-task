@@ -373,11 +373,15 @@ interface Props {}
 
 const Users = (props: Props) => {
   const selectPage = (pageNumber: number): void => console.log(pageNumber);
-  const filterUsers = (filterText: string): void => console.log(filterText);
+  const filterUsers = (filterText: string): void => {
+    if (filterText.trim()) console.log(filterText);
+  };
   return (
     <div>
       <h2>Users</h2>
+
       <Filter onFilter={filterUsers} />
+
       <ListGroup>
         {data.result.map((user) => (
           <UserItem
