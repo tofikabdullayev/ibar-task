@@ -29,7 +29,7 @@ const Users = (props: Props) => {
       ) : (
         <>
           <ListGroup>
-            {usersState.users?.result.map((user) => (
+            {usersState.users.result.map((user) => (
               <UserItem
                 key={user.id}
                 first_name={user.first_name}
