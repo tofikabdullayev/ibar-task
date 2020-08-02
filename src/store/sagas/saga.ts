@@ -5,7 +5,7 @@ import { getUsersComplete, getUsersError } from '../actions/users';
 
 function* onGetUsers(action: any) {
   try {
-    let response = yield call(getUsers);
+    let response = yield call(getUsers, action.page);
     const users = response.data;
     yield put(getUsersComplete(users));
   } catch (error) {

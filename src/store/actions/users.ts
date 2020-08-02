@@ -1,9 +1,10 @@
 import { GET_USERS, GET_USERS_COMPLETE, GET_USERS_ERROR } from './actionTypes';
 import { UsersApi } from '../interfaces';
 
-export function getUsers() {
+export function getUsers(page: number = 1) {
   return {
     type: GET_USERS,
+    page,
   };
 }
 

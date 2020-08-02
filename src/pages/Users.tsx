@@ -10,7 +10,7 @@ import { UsersState } from '../store/reducers/users';
 interface Props {}
 
 const Users = (props: Props) => {
-  const selectPage = (pageNumber: number): void => console.log(pageNumber);
+  const selectPage = (pageNumber: number) => dispatch(getUsers(pageNumber));
   const filterUsers = (filterText: string): void => {
     if (filterText.trim()) console.log(filterText);
   };
@@ -25,7 +25,10 @@ const Users = (props: Props) => {
 
       <Filter onFilter={filterUsers} />
       {usersState.isLoading ? (
-        <Spinner color="primary" />
+        <Spinner
+          color="primary"
+          style={{ display: 'block', margin: '0 auto' }}
+        />
       ) : (
         <>
           <ListGroup>
