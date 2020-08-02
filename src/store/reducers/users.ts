@@ -3,16 +3,24 @@ import {
   GET_USERS_COMPLETE,
   GET_USERS_ERROR,
 } from '../actions/actionTypes';
+import { UsersApi } from '../interfaces';
 
 export interface UsersState {
-  // TODO: add interface for user
-  users: [];
+  users: UsersApi;
   isLoading: boolean;
   error?: any;
 }
 
 const initialState: UsersState = {
-  users: [],
+  users: {
+    _meta: {
+      totalCount: 0,
+      pageCount: 0,
+      currentPage: 0,
+      perPage: 0,
+    },
+    result: [],
+  },
   isLoading: false,
 };
 
@@ -29,7 +37,7 @@ export default function usersReducer(
     case GET_USERS_COMPLETE:
       return {
         ...state,
-        users: action.users,
+        users: action.payload,
         isLoading: false,
       };
     case GET_USERS_ERROR:

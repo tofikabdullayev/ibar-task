@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import { Media, Button, ButtonGroup } from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
 
 interface RouteParams {
   userId: string;
@@ -38,7 +38,6 @@ const User = (props: Props) => {
   return (
     <div>
       <h2>User Info</h2>
-      <Media src={data.result._links.avatar.href} />
       <p>
         Name:{' '}
         <strong>{data.result.first_name + ' ' + data.result.last_name}</strong>

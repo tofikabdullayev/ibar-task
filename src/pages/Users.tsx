@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
-import { ListGroup } from 'reactstrap';
+import { ListGroup, Spinner } from 'reactstrap';
 import Pagination from '../components/Pagination';
 import UserItem from '../components/User';
 import Filter from '../components/Filter';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers } from '../store/actions/users';
+import { UsersState } from '../store/reducers/users';
 
 const data = {
   _meta: {
@@ -375,29 +378,38 @@ const Users = (props: Props) => {
   const filterUsers = (filterText: string): void => {
     if (filterText.trim()) console.log(filterText);
   };
+  const dispatch = useDispatch();
+  const usersState = useSelector((state: { users: UsersState }) => state.users);
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
   return (
     <div>
       <h2>Users</h2>
 
       <Filter onFilter={filterUsers} />
+      {usersState.isLoading ? (
+        <Spinner color="primary" />
+      ) : (
+        <>
+          <ListGroup>
+            {usersState.users?.result.map((user) => (
+              <UserItem
+                key={user.id}
+                first_name={user.first_name}
+                last_name={user.last_name}
+                id={user.id}
+              ></UserItem>
+            ))}
+          </ListGroup>
 
-      <ListGroup>
-        {data.result.map((user) => (
-          <UserItem
-            key={user.id}
-            first_name={user.first_name}
-            last_name={user.last_name}
-            id={user.id}
-            avatar={user._links.avatar.href}
-          ></UserItem>
-        ))}
-      </ListGroup>
-
-      <Pagination
-        currentPage={data._meta.currentPage}
-        pageCount={data._meta.pageCount}
-        selectPage={selectPage}
-      />
+          <Pagination
+            currentPage={usersState.users?._meta.currentPage}
+            pageCount={usersState.users?._meta.pageCount}
+            selectPage={selectPage}
+          />
+        </>
+      )}
     </div>
   );
 };
