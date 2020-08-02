@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ListGroup } from 'reactstrap';
 import Pagination from '../components/Pagination';
-
 import UserItem from '../components/User';
 import Filter from '../components/Filter';
 
