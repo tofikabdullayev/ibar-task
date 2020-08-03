@@ -26,3 +26,12 @@ export function getUser(userId: number) {
 export function deleteUser(userId: number) {
   return axios.delete(userUrl(userId));
 }
+
+export function editUser(userId: number, name: string, email: string) {
+  const fullName = name.split(' ');
+  return axios.patch(userUrl(userId), {
+    first_name: fullName[0],
+    last_name: fullName[1],
+    email,
+  });
+}

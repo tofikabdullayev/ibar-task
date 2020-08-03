@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { Button, ButtonGroup, Spinner, Alert } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, deleteUser } from '../store/actions/user';
+import { getUser, deleteUser, editUser } from '../store/actions/user';
 import { UserState } from '../store/reducers/user';
+import UserInfo from '../components/UserInfo';
 
 interface RouteParams {
   userId: string;
@@ -17,6 +18,12 @@ const User = (props: Props) => {
   const userState = useSelector(
     (state: { selectedUser: UserState }) => state.selectedUser
   );
+
+  const [editMode, setEditMode] = useState(false);
+
+  const onEdit = (name: string, email: string) => {
+    dispatch(editUser(userId, name, email));
+  };
 
   useEffect(() => {
     dispatch(getUser(userId));
@@ -32,19 +39,22 @@ const User = (props: Props) => {
         />
       ) : (
         <>
-          <p>
-            Name:{' '}
-            <strong>
-              {userState.user.result.first_name +
-                ' ' +
-                userState.user.result.last_name}
-            </strong>
-          </p>
-          <p>
-            Email: <strong>{userState.user.result.email}</strong>
-          </p>
+          <UserInfo
+            name={
+              userState.user.result.first_name +
+              ' ' +
+              userState.user.result.last_name
+            }
+            email={userState.user.result.email}
+            isEditMode={editMode}
+            onSubmit={onEdit}
+            onCancel={() => setEditMode(false)}
+          />
+
           <ButtonGroup>
-            <Button color="success">Edit</Button>
+            <Button color="success" onClick={() => setEditMode(true)}>
+              Edit
+            </Button>
             <Button color="danger" onClick={() => dispatch(deleteUser(userId))}>
               Remove
             </Button>

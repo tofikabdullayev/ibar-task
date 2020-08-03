@@ -4,8 +4,9 @@ import {
   FILTER_USERS_BY_NAME,
   GET_USER,
   DELETE_USER,
+  EDIT_USER,
 } from '../actions/actionTypes';
-import { getUsers, getUser, deleteUser } from '../../API';
+import { getUsers, getUser, deleteUser, editUser } from '../../API';
 import {
   getUsers as getUsersAction,
   getUsersComplete,
@@ -17,6 +18,8 @@ import {
   getUserComplete,
   deleteUserComplete,
   deleteUserError,
+  editUserComplete,
+  editUserError,
 } from '../actions/user';
 
 export interface GetUserActionInterface {
@@ -62,6 +65,26 @@ function* onDeleteUser(action: { type: string; userId: number }) {
   }
 }
 
+function* onEditUser(action: {
+  type: string;
+  userId: number;
+  name: string;
+  email: string;
+}) {
+  try {
+    let response = yield call(
+      editUser,
+      action.userId,
+      action.name,
+      action.email
+    );
+    const user = response.data;
+    yield put(editUserComplete(user));
+  } catch (error) {
+    yield put(editUserError(error));
+  }
+}
+
 export function* usersSaga() {
   yield takeEvery(GET_USERS, onGetUsers);
 }
@@ -72,6 +95,10 @@ export function* filterUsersSaga() {
 
 export function* userSaga() {
   yield takeEvery(GET_USER, onGetUser);
+}
+
+export function* editSaga() {
+  yield takeEvery(EDIT_USER, onEditUser);
 }
 
 export function* deleteSaga() {
