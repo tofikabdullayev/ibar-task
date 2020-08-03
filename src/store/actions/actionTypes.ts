@@ -1,3 +1,21 @@
 export const GET_USERS = 'GET_USERS';
 export const GET_USERS_COMPLETE = 'GET_USERS_COMPLETE';
 export const GET_USERS_ERROR = 'GET_USERS_ERROR';
+
+export const FILTER_USERS_BY_NAME = 'FILTER_USERS_BY_NAME';
+
+export const GET_USER = 'GET_USER';
+export const GET_USER_COMPLETE = 'GET_USER_COMPLETE';
+export const GET_USER_ERROR = 'GET_USER_ERROR';
+
+export const DELETE_USER = 'DELETE_USER';
+export const DELETE_USER_COMPLETE = 'DELETE_USER_COMPLETE';
+export const DELETE_USER_ERROR = 'DELETE_USER_ERROR';
+
+export const EDIT_USER = 'EDIT_USER';
+export const EDIT_USER_COMPLETE = 'EDIT_USER_COMPLETE';
+export const EDIT_USER_ERROR = 'EDIT_USER_ERROR';
+
+export const ADD_USER = 'ADD_USER';
+export const ADD_USER_COMPLETE = 'ADD_USER_COMPLETE';
+export const ADD_USER_ERROR = 'ADD_USER_ERROR';

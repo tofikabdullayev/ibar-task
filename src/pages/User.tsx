@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import { Media, Button, ButtonGroup } from 'reactstrap';
+import { Button, ButtonGroup, Spinner, Alert } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser, deleteUser, editUser } from '../store/actions/user';
+import { UserState } from '../store/reducers/user';
+import UserInfo from '../components/UserInfo';
 
 interface RouteParams {
   userId: string;
@@ -8,58 +12,69 @@ interface RouteParams {
 
 interface Props extends RouteComponentProps<RouteParams> {}
 
-const data = {
-  _meta: {
-    success: true,
-    code: 200,
-    message: 'OK. Everything worked as expected.',
-    rateLimit: { limit: 30, remaining: 29, reset: 2 },
-  },
-  result: {
-    id: '11918',
-    first_name: 'Emilia',
-    last_name: 'Robel',
-    gender: 'female',
-    dob: '1949-01-14',
-    email: 'ryan.agnes@example.com',
-    phone: '(514) 618-8655 x26218',
-    website: 'http://www.volkman.com/nisi-amet-unde-numquam-id-asperiores',
-    address: '149 Weissnat Forks\nSouth Toreybury, ME 50711-7903',
-    status: 'inactive',
-    _links: {
-      self: { href: 'https://gorest.co.in/public-api/users/11918' },
-      edit: { href: 'https://gorest.co.in/public-api/users/11918' },
-      avatar: { href: 'https://lorempixel.com/250/250/people/?29241' },
-    },
-  },
-};
-
 const User = (props: Props) => {
+  const userId = props.match.params.userId;
+  const dispatch = useDispatch();
+  const userState = useSelector(
+    (state: { selectedUser: UserState }) => state.selectedUser
+  );
+
+  const [editMode, setEditMode] = useState(false);
+
+  const onEdit = (name: string, email: string) => {
+    dispatch(editUser(userId, name, email));
+    setEditMode(false);
+  };
+
+  useEffect(() => {
+    dispatch(getUser(userId));
+  }, [dispatch, userId]);
+
   return (
     <div>
       <h2>User Info</h2>
-      <Media src={data.result._links.avatar.href} />
-      <p>
-        Name:{' '}
-        <strong>{data.result.first_name + ' ' + data.result.last_name}</strong>
-      </p>
-      <p>
-        Email: <strong>{data.result.email}</strong>
-      </p>
-      <ButtonGroup>
-        <Button color="success">Edit</Button>
-        <Button color="danger" onClick={() => alert('removed!')}>
-          Remove
-        </Button>
-        <Button color="primary">
-          <Link
-            to={`/user/${props.match.params.userId}/posts`}
-            style={{ color: 'inherit', textDecoration: 'inherit' }}
-          >
-            Posts
-          </Link>
-        </Button>
-      </ButtonGroup>
+      {userState.isLoading ? (
+        <Spinner
+          color="primary"
+          style={{ display: 'block', margin: '0 auto' }}
+        />
+      ) : (
+        <>
+          <UserInfo
+            name={
+              userState.user.result.first_name +
+              ' ' +
+              userState.user.result.last_name
+            }
+            email={userState.user.result.email}
+            isEditMode={editMode}
+            onSubmit={onEdit}
+            onCancel={() => setEditMode(false)}
+          />
+
+          <ButtonGroup>
+            <Button color="success" onClick={() => setEditMode(true)}>
+              Edit
+            </Button>
+            <Button color="danger" onClick={() => dispatch(deleteUser(userId))}>
+              Remove
+            </Button>
+            <Button color="primary">
+              <Link
+                to={`/user/${userId}/posts`}
+                style={{ color: 'inherit', textDecoration: 'inherit' }}
+              >
+                Posts
+              </Link>
+            </Button>
+          </ButtonGroup>
+          {userState.deletedMessage && (
+            <Alert color="success">
+              {userState.deletedMessage} <Link to="/">Back</Link>
+            </Alert>
+          )}
+        </>
+      )}
     </div>
   );
 };
