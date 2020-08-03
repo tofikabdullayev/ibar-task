@@ -2,6 +2,9 @@ import {
   GET_USER,
   GET_USER_COMPLETE,
   GET_USER_ERROR,
+  DELETE_USER,
+  DELETE_USER_COMPLETE,
+  DELETE_USER_ERROR,
 } from '../actions/actionTypes';
 
 export interface UserState {
@@ -15,6 +18,7 @@ export interface UserState {
   };
   isLoading: boolean;
   error?: any;
+  deletedMessage?: string;
 }
 
 const initialState: UserState = {
@@ -44,8 +48,26 @@ export default function userReducer(
         ...state,
         user: action.payload,
         isLoading: false,
+        deletedMessage: '',
       };
     case GET_USER_ERROR:
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false,
+      };
+    case DELETE_USER:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case DELETE_USER_COMPLETE:
+      return {
+        ...state,
+        deletedMessage: 'User removed!',
+        isLoading: false,
+      };
+    case DELETE_USER_ERROR:
       return {
         ...state,
         error: action.error,

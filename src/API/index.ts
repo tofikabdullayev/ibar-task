@@ -22,3 +22,7 @@ export function getUsers({ page, name }: IgetUser) {
 export function getUser(userId: number) {
   return axios.get(userUrl(userId));
 }
+
+export function deleteUser(userId: number) {
+  return axios.delete(userUrl(userId));
+}

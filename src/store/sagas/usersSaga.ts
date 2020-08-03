@@ -3,15 +3,21 @@ import {
   GET_USERS,
   FILTER_USERS_BY_NAME,
   GET_USER,
+  DELETE_USER,
 } from '../actions/actionTypes';
-import { getUsers, getUser } from '../../API';
+import { getUsers, getUser, deleteUser } from '../../API';
 import {
   getUsers as getUsersAction,
   getUsersComplete,
   getUsersError,
 } from '../actions/users';
 import { UsersState } from '../reducers/users';
-import { getUserError, getUserComplete } from '../actions/user';
+import {
+  getUserError,
+  getUserComplete,
+  deleteUserComplete,
+  deleteUserError,
+} from '../actions/user';
 
 export interface GetUserActionInterface {
   type: string;
@@ -46,6 +52,16 @@ function* onGetUser(action: { type: string; userId: number }) {
   }
 }
 
+function* onDeleteUser(action: { type: string; userId: number }) {
+  try {
+    let response = yield call(deleteUser, action.userId);
+    const user = response.data;
+    yield put(deleteUserComplete(user));
+  } catch (error) {
+    yield put(deleteUserError(error));
+  }
+}
+
 export function* usersSaga() {
   yield takeEvery(GET_USERS, onGetUsers);
 }
@@ -56,4 +72,8 @@ export function* filterUsersSaga() {
 
 export function* userSaga() {
   yield takeEvery(GET_USER, onGetUser);
+}
+
+export function* deleteSaga() {
+  yield takeEvery(DELETE_USER, onDeleteUser);
 }
