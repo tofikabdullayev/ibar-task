@@ -1,10 +1,22 @@
-import { GET_USERS, GET_USERS_COMPLETE, GET_USERS_ERROR } from './actionTypes';
+import {
+  GET_USERS,
+  GET_USERS_COMPLETE,
+  GET_USERS_ERROR,
+  FILTER_USERS_BY_NAME,
+} from './actionTypes';
 import { UsersApi } from '../interfaces';
 
-export function getUsers(page: number = 1) {
+export function getUsers(page: number) {
   return {
     type: GET_USERS,
     page,
+  };
+}
+
+export function filterByName(filterText: string) {
+  return {
+    type: FILTER_USERS_BY_NAME,
+    filterText,
   };
 }
 

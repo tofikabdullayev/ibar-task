@@ -4,7 +4,7 @@ import Pagination from '../components/Pagination';
 import UserItem from '../components/User';
 import Filter from '../components/Filter';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from '../store/actions/users';
+import { getUsers, filterByName } from '../store/actions/users';
 import { UsersState } from '../store/reducers/users';
 
 interface Props {}
@@ -12,12 +12,12 @@ interface Props {}
 const Users = (props: Props) => {
   const selectPage = (pageNumber: number) => dispatch(getUsers(pageNumber));
   const filterUsers = (filterText: string): void => {
-    if (filterText.trim()) console.log(filterText);
+    dispatch(filterByName(filterText.trim()));
   };
   const dispatch = useDispatch();
   const usersState = useSelector((state: { users: UsersState }) => state.users);
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getUsers(1));
   }, [dispatch]);
   return (
     <div>

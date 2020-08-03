@@ -8,7 +8,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import rootReducer from './store/reducers/rootReducer';
-import usersSaga from './store/sagas/saga';
+import rootSaga from './store/sagas/rootSaga';
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -23,7 +23,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
-sagaMiddleware.run(usersSaga);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>

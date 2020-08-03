@@ -2,11 +2,13 @@ import {
   GET_USERS,
   GET_USERS_COMPLETE,
   GET_USERS_ERROR,
+  FILTER_USERS_BY_NAME,
 } from '../actions/actionTypes';
 import { UsersApi } from '../interfaces';
 
 export interface UsersState {
   users: UsersApi;
+  filterText?: string;
   isLoading: boolean;
   error?: any;
 }
@@ -39,6 +41,11 @@ export default function usersReducer(
         ...state,
         users: action.payload,
         isLoading: false,
+      };
+    case FILTER_USERS_BY_NAME:
+      return {
+        ...state,
+        filterText: action.filterText,
       };
     case GET_USERS_ERROR:
       return {
