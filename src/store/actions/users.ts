@@ -13,13 +13,6 @@ export function getUsers(page: number = 1) {
   };
 }
 
-export function filterByName(filterText: string) {
-  return {
-    type: FILTER_USERS_BY_NAME,
-    filterText,
-  };
-}
-
 export function getUsersComplete(payload: UsersApi) {
   return {
     type: GET_USERS_COMPLETE,
@@ -31,5 +24,12 @@ export function getUsersError(error: any) {
   return {
     type: GET_USERS_ERROR,
     error,
+  };
+}
+
+export function filterByName(filterText: string) {
+  return {
+    type: FILTER_USERS_BY_NAME,
+    filterText,
   };
 }

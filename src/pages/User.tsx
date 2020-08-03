@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import { Button, ButtonGroup } from 'reactstrap';
+import { Button, ButtonGroup, Spinner } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../store/actions/user';
+import { UserState } from '../store/reducers/user';
 
 interface RouteParams {
   userId: string;
@@ -35,30 +38,53 @@ const data = {
 };
 
 const User = (props: Props) => {
+  const userId = props.match.params.userId;
+  const dispatch = useDispatch();
+  const userState = useSelector(
+    (state: { selectedUser: UserState }) => state.selectedUser
+  );
+
+  useEffect(() => {
+    dispatch(getUser(userId));
+  }, [dispatch, userId]);
+
   return (
     <div>
       <h2>User Info</h2>
-      <p>
-        Name:{' '}
-        <strong>{data.result.first_name + ' ' + data.result.last_name}</strong>
-      </p>
-      <p>
-        Email: <strong>{data.result.email}</strong>
-      </p>
-      <ButtonGroup>
-        <Button color="success">Edit</Button>
-        <Button color="danger" onClick={() => alert('removed!')}>
-          Remove
-        </Button>
-        <Button color="primary">
-          <Link
-            to={`/user/${props.match.params.userId}/posts`}
-            style={{ color: 'inherit', textDecoration: 'inherit' }}
-          >
-            Posts
-          </Link>
-        </Button>
-      </ButtonGroup>
+      {userState.isLoading ? (
+        <Spinner
+          color="primary"
+          style={{ display: 'block', margin: '0 auto' }}
+        />
+      ) : (
+        <>
+          <p>
+            Name:{' '}
+            <strong>
+              {userState.user.result.first_name +
+                ' ' +
+                userState.user.result.last_name}
+            </strong>
+          </p>
+          <p>
+            Email: <strong>{userState.user.result.email}</strong>
+          </p>
+          <ButtonGroup>
+            <Button color="success">Edit</Button>
+            <Button color="danger" onClick={() => alert('removed!')}>
+              Remove
+            </Button>
+            <Button color="primary">
+              <Link
+                to={`/user/${userId}/posts`}
+                style={{ color: 'inherit', textDecoration: 'inherit' }}
+              >
+                Posts
+              </Link>
+            </Button>
+          </ButtonGroup>
+        </>
+      )}
     </div>
   );
 };

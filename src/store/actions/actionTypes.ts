@@ -3,3 +3,7 @@ export const GET_USERS_COMPLETE = 'GET_USERS_COMPLETE';
 export const GET_USERS_ERROR = 'GET_USERS_ERROR';
 
 export const FILTER_USERS_BY_NAME = 'FILTER_USERS_BY_NAME';
+
+export const GET_USER = 'GET_USER';
+export const GET_USER_COMPLETE = 'GET_USER_COMPLETE';
+export const GET_USER_ERROR = 'GET_USER_ERROR';
