@@ -6,7 +6,7 @@ import {
 } from './actionTypes';
 import { UsersApi } from '../interfaces';
 
-export function getUsers(page: number) {
+export function getUsers(page: number = 1) {
   return {
     type: GET_USERS,
     page,

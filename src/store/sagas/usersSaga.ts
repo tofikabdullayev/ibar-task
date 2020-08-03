@@ -13,7 +13,8 @@ export interface GetUserActionInterface {
   page: number;
 }
 
-const getFilterText = (state: { users: UsersState }) => state.users.filterText;
+const getFilterText = (state: { usersState: UsersState }) =>
+  state.usersState.filterText;
 
 function* onGetUsers({ page }: GetUserActionInterface) {
   try {

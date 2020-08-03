@@ -10,14 +10,18 @@ import { UsersState } from '../store/reducers/users';
 interface Props {}
 
 const Users = (props: Props) => {
+  const dispatch = useDispatch();
+  const usersState = useSelector(
+    (state: { usersState: UsersState }) => state.usersState
+  );
+
   const selectPage = (pageNumber: number) => dispatch(getUsers(pageNumber));
   const filterUsers = (filterText: string): void => {
     dispatch(filterByName(filterText.trim()));
   };
-  const dispatch = useDispatch();
-  const usersState = useSelector((state: { users: UsersState }) => state.users);
+
   useEffect(() => {
-    dispatch(getUsers(1));
+    dispatch(getUsers());
   }, [dispatch]);
   return (
     <div>
