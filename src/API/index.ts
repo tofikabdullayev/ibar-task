@@ -8,10 +8,10 @@ export interface IgetUser {
 const baseUrl = 'https://gorest.co.in/public-api';
 const token = 'bcWsUE6X9JC1_-lqd_lAk_UQhGz1teLYSThk';
 
-const usersUrl = `${baseUrl}/users?_format=json&access-token=${token}`;
+const usersUrl = `${baseUrl}/users?access-token=${token}`;
 
 const userUrl = (userId: number) =>
-  `${baseUrl}/users/${userId}?_format=json&access-token=${token}`;
+  `${baseUrl}/users/${userId}?access-token=${token}`;
 
 export function getUsers({ page, name }: IgetUser) {
   const pageParam = page ? `&page=${page}` : '';
@@ -21,6 +21,16 @@ export function getUsers({ page, name }: IgetUser) {
 
 export function getUser(userId: number) {
   return axios.get(userUrl(userId));
+}
+
+export function addUser(name: string, email: string) {
+  const fullName = name.split(' ');
+  return axios.post(usersUrl, {
+    first_name: fullName[0],
+    last_name: fullName[1] ? fullName[1] : 'some last name',
+    gender: 'male',
+    email,
+  });
 }
 
 export function deleteUser(userId: number) {

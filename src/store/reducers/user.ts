@@ -8,6 +8,9 @@ import {
   EDIT_USER,
   EDIT_USER_COMPLETE,
   EDIT_USER_ERROR,
+  ADD_USER,
+  ADD_USER_COMPLETE,
+  ADD_USER_ERROR,
 } from '../actions/actionTypes';
 
 export interface UserState {
@@ -54,6 +57,23 @@ export default function userReducer(
         deletedMessage: '',
       };
     case GET_USER_ERROR:
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false,
+      };
+    case ADD_USER:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case ADD_USER_COMPLETE:
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false,
+      };
+    case ADD_USER_ERROR:
       return {
         ...state,
         error: action.error,

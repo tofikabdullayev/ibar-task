@@ -15,3 +15,7 @@ export const DELETE_USER_ERROR = 'DELETE_USER_ERROR';
 export const EDIT_USER = 'EDIT_USER';
 export const EDIT_USER_COMPLETE = 'EDIT_USER_COMPLETE';
 export const EDIT_USER_ERROR = 'EDIT_USER_ERROR';
+
+export const ADD_USER = 'ADD_USER';
+export const ADD_USER_COMPLETE = 'ADD_USER_COMPLETE';
+export const ADD_USER_ERROR = 'ADD_USER_ERROR';

@@ -8,6 +8,9 @@ import {
   EDIT_USER,
   EDIT_USER_COMPLETE,
   EDIT_USER_ERROR,
+  ADD_USER,
+  ADD_USER_COMPLETE,
+  ADD_USER_ERROR,
 } from './actionTypes';
 
 export function getUser(userId: string) {
@@ -70,6 +73,28 @@ export function editUserComplete(payload: any) {
 export function editUserError(error: any) {
   return {
     type: EDIT_USER_ERROR,
+    error,
+  };
+}
+
+export function addUser(name: string, email: string) {
+  return {
+    type: ADD_USER,
+    name,
+    email,
+  };
+}
+
+export function addUserComplete(payload: any) {
+  return {
+    type: ADD_USER_COMPLETE,
+    payload,
+  };
+}
+
+export function addUserError(error: any) {
+  return {
+    type: ADD_USER_ERROR,
     error,
   };
 }

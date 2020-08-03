@@ -21,7 +21,6 @@ const UserInfo = ({ name, email, isEditMode, onSubmit, onCancel }: Props) => {
 
   const onSubmitEdit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onCancel();
     onSubmit(userName, userEmail);
   };
   return (

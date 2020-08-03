@@ -5,6 +5,7 @@ import {
   userSaga,
   deleteSaga,
   editSaga,
+  addSaga,
 } from './usersSaga';
 
 export default function* rootSaga() {
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     userSaga(),
     deleteSaga(),
     editSaga(),
+    addSaga(),
   ]);
 }

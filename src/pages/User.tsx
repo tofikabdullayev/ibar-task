@@ -23,6 +23,7 @@ const User = (props: Props) => {
 
   const onEdit = (name: string, email: string) => {
     dispatch(editUser(userId, name, email));
+    setEditMode(false);
   };
 
   useEffect(() => {

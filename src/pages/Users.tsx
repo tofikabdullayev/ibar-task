@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { ListGroup, Spinner } from 'reactstrap';
+import { ListGroup, Spinner, Button } from 'reactstrap';
 import Pagination from '../components/Pagination';
 import UserItem from '../components/User';
 import Filter from '../components/Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, filterByName } from '../store/actions/users';
 import { UsersState } from '../store/reducers/users';
+import { Link } from 'react-router-dom';
 
 interface Props {}
 
@@ -25,7 +26,17 @@ const Users = (props: Props) => {
   }, [dispatch]);
   return (
     <div>
-      <h2>Users</h2>
+      <h2>
+        Users{' '}
+        <Button color="success">
+          <Link
+            to={`/user/add`}
+            style={{ color: 'inherit', textDecoration: 'inherit' }}
+          >
+            Add user
+          </Link>
+        </Button>
+      </h2>
 
       <Filter onFilter={filterUsers} />
       {usersState.isLoading ? (
