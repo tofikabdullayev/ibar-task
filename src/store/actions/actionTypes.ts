@@ -1,3 +1,5 @@
+// USER ACTION TYPES
+
 export const GET_USERS = 'GET_USERS';
 export const GET_USERS_COMPLETE = 'GET_USERS_COMPLETE';
 export const GET_USERS_ERROR = 'GET_USERS_ERROR';
@@ -19,3 +21,27 @@ export const EDIT_USER_ERROR = 'EDIT_USER_ERROR';
 export const ADD_USER = 'ADD_USER';
 export const ADD_USER_COMPLETE = 'ADD_USER_COMPLETE';
 export const ADD_USER_ERROR = 'ADD_USER_ERROR';
+
+// POST ACTION TYPES
+
+export const GET_POSTS = 'GET_POSTS';
+export const GET_POSTS_COMPLETE = 'GET_POSTS_COMPLETE';
+export const GET_POSTS_ERROR = 'GET_POSTS_ERROR';
+
+export const FILTER_POSTS_BY_NAME = 'FILTER_POSTS_BY_NAME';
+
+export const GET_POST = 'GET_POST';
+export const GET_POST_COMPLETE = 'GET_POST_COMPLETE';
+export const GET_POST_ERROR = 'GET_POST_ERROR';
+
+export const DELETE_POST = 'DELETE_POST';
+export const DELETE_POST_COMPLETE = 'DELETE_POST_COMPLETE';
+export const DELETE_POST_ERROR = 'DELETE_POST_ERROR';
+
+export const EDIT_POST = 'EDIT_USER';
+export const EDIT_POST_COMPLETE = 'EDIT_POST_COMPLETE';
+export const EDIT_POST_ERROR = 'EDIT_POST_ERROR';
+
+export const ADD_POST = 'ADD_USER';
+export const ADD_POST_COMPLETE = 'ADD_POST_COMPLETE';
+export const ADD_POST_ERROR = 'ADD_POST_ERROR';
