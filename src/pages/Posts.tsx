@@ -1,9 +1,97 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Post } from '../store/interfaces';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserState } from '../store/reducers/user';
+import { getPosts, filterByName } from '../store/actions/posts';
+import { RouteComponentProps, Link } from 'react-router-dom';
+import {
+  Card,
+  CardText,
+  CardBody,
+  CardTitle,
+  Button,
+  Spinner,
+} from 'reactstrap';
+import Filter from '../components/Filter';
+import { PostsState } from '../store/reducers/posts';
+import Pagination from '../components/Pagination';
 
-interface Props {}
+interface RouteParams {
+  userId: string;
+}
+
+interface Props extends Post, RouteComponentProps<RouteParams> {}
 
 const Posts = (props: Props) => {
-  return <div>Posts</div>;
+  const userId = props.match.params.userId;
+
+  const dispatch = useDispatch();
+  const selectedUser = useSelector(
+    (state: { selectedUser: UserState }) => state.selectedUser
+  );
+  const postsState = useSelector(
+    (state: { postsState: PostsState }) => state.postsState
+  );
+
+  const selectPage = (pageNumber: number) =>
+    dispatch(getPosts(userId, pageNumber));
+  const filterUsers = (filterText: string): void => {
+    dispatch(filterByName(userId, filterText.trim()));
+  };
+
+  useEffect(() => {
+    dispatch(getPosts(userId));
+  }, [dispatch, userId]);
+
+  const name = selectedUser.user.result.first_name;
+  return (
+    <div>
+      <h2>
+        {name && name + "'s"} Posts{' '}
+        <Button color="success">
+          <Link
+            to={`/user/${userId}/posts/add`}
+            style={{ color: 'inherit', textDecoration: 'inherit' }}
+          >
+            Add post
+          </Link>
+        </Button>
+      </h2>
+      <Filter onFilter={filterUsers} />
+
+      {postsState.isLoading ? (
+        <Spinner
+          color="primary"
+          style={{ display: 'block', margin: '0 auto' }}
+        />
+      ) : (
+        <>
+          {postsState.posts.result.map((post) => (
+            <Card style={{ marginBottom: 20 }} key={post.id}>
+              <CardBody>
+                <CardTitle>{post.title}</CardTitle>
+                <CardText>{post.body}</CardText>
+                <Button>
+                  <Link
+                    to={`/user/${userId}/posts/${post.id}`}
+                    style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  >
+                    Open post
+                  </Link>
+                </Button>
+              </CardBody>
+            </Card>
+          ))}
+
+          <Pagination
+            currentPage={postsState.posts?._meta.currentPage}
+            pageCount={postsState.posts?._meta.pageCount}
+            selectPage={selectPage}
+          />
+        </>
+      )}
+    </div>
+  );
 };
 
 export default Posts;

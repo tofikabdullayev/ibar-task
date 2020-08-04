@@ -12,6 +12,7 @@ import User from './pages/User';
 import Posts from './pages/Posts';
 import Post from './pages/Post';
 import AddUser from './pages/AddUser';
+import AddPost from './pages/AddPost';
 
 function App() {
   return (
@@ -26,6 +27,11 @@ function App() {
           <Route path="/user/add" exact component={AddUser}></Route>
           <Route path="/user/:userId" exact component={User}></Route>
           <Route path="/user/:userId/posts" exact component={Posts}></Route>
+          <Route
+            path="/user/:userId/posts/add"
+            exact
+            component={AddPost}
+          ></Route>
           <Route
             path="/user/:userId/posts/:postId"
             exact

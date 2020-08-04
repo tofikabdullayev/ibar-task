@@ -7,6 +7,14 @@ import {
   editSaga,
   addSaga,
 } from './usersSaga';
+import {
+  postsSaga,
+  filterPostsSaga,
+  getPostSaga,
+  addPostSaga,
+  editPostSaga,
+  deletePostSaga,
+} from './postsSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -16,5 +24,11 @@ export default function* rootSaga() {
     deleteSaga(),
     editSaga(),
     addSaga(),
+    postsSaga(),
+    filterPostsSaga(),
+    getPostSaga(),
+    addPostSaga(),
+    editPostSaga(),
+    deletePostSaga(),
   ]);
 }
