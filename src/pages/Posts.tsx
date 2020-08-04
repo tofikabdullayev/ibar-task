@@ -13,6 +13,7 @@ import {
   CardSubtitle,
   Button,
   Spinner,
+  Pagination,
 } from 'reactstrap';
 import Filter from '../components/Filter';
 import { PostsState } from '../store/reducers/posts';
@@ -66,6 +67,12 @@ const Posts = (props: Props) => {
               </CardBody>
             </Card>
           ))}
+
+          <Pagination
+            currentPage={postsState.posts?._meta.currentPage}
+            pageCount={postsState.posts?._meta.pageCount}
+            selectPage={selectPage}
+          />
         </>
       )}
     </div>
