@@ -13,10 +13,10 @@ import {
   CardSubtitle,
   Button,
   Spinner,
-  Pagination,
 } from 'reactstrap';
 import Filter from '../components/Filter';
 import { PostsState } from '../store/reducers/posts';
+import Pagination from '../components/Pagination';
 
 interface RouteParams {
   userId: string;
@@ -59,7 +59,7 @@ const Posts = (props: Props) => {
       ) : (
         <>
           {postsState.posts.result.map((post) => (
-            <Card style={{ marginBottom: 20 }}>
+            <Card style={{ marginBottom: 20 }} key={post.id}>
               <CardBody>
                 <CardTitle>{post.title}</CardTitle>
                 <CardText>{post.body}</CardText>
