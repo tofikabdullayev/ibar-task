@@ -108,7 +108,7 @@ function* onAddPost(action: {
     );
     const post = response.data;
     yield put(addPostComplete(post));
-    yield (window.location.href = '/posts/' + post.result.id);
+    // yield (window.location.href = `/users/${action.userId}/posts/`);
   } catch (error) {
     yield put(addPostError(error));
   }

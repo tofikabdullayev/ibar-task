@@ -46,7 +46,17 @@ const Posts = (props: Props) => {
   const name = selectedUser.user.result.first_name;
   return (
     <div>
-      <h2>{name && name + "'s"} Posts</h2>
+      <h2>
+        {name && name + "'s"} Posts{' '}
+        <Button color="success">
+          <Link
+            to={`/user/${userId}/posts/add`}
+            style={{ color: 'inherit', textDecoration: 'inherit' }}
+          >
+            Add post
+          </Link>
+        </Button>
+      </h2>
       <Filter onFilter={filterUsers} />
 
       {postsState.isLoading ? (

@@ -75,7 +75,7 @@ interface PostInfoProps {
   onSubmit: (title: string, body: string) => void;
   onCancel: () => void;
 }
-const PostInfo = ({
+export const PostInfo = ({
   title,
   body,
   isEditMode,

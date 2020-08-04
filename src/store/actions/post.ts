@@ -77,9 +77,10 @@ export function editPostError(error: any) {
   };
 }
 
-export function addPost(title: string, body: string) {
+export function addPost(userId: string, title: string, body: string) {
   return {
     type: ADD_POST,
+    userId,
     title,
     body,
   };
