@@ -3,14 +3,12 @@ import { Post } from '../store/interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserState } from '../store/reducers/user';
 import { getPosts, filterByName } from '../store/actions/posts';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import {
   Card,
-  CardImg,
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
   Button,
   Spinner,
 } from 'reactstrap';
@@ -63,7 +61,14 @@ const Posts = (props: Props) => {
               <CardBody>
                 <CardTitle>{post.title}</CardTitle>
                 <CardText>{post.body}</CardText>
-                <Button>Open post</Button>
+                <Button>
+                  <Link
+                    to={`/user/${userId}/posts/${post.id}`}
+                    style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  >
+                    Open post
+                  </Link>
+                </Button>
               </CardBody>
             </Card>
           ))}
