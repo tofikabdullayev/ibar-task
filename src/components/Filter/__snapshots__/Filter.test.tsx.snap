@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the component 1`] = `
+<Form
+  onSubmit={[Function]}
+  style={
+    Object {
+      "display": "flex",
+      "margin": "20px 0",
+    }
+  }
+  tag="form"
+>
+  <Input
+    name="filter"
+    onChange={[Function]}
+    placeholder="Type to filter"
+    type="text"
+    value=""
+  />
+  <Button
+    color="secondary"
+    tag="button"
+  >
+    Filter
+  </Button>
+</Form>
+`;
