@@ -9,7 +9,7 @@ interface Props {
 
 const PaginationComponent = ({ pageCount, currentPage, selectPage }: Props) => {
   const pages = [...Array(pageCount)].map((e, i) => (
-    <PaginationItem active={currentPage === i + 1} key={`${i}_${Date.now()}`}>
+    <PaginationItem active={currentPage === i + 1} key={`${i}_id`}>
       <PaginationLink onClick={() => selectPage(i + 1)}>{i + 1}</PaginationLink>
     </PaginationItem>
   ));

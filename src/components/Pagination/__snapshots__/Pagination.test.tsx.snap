@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the component 1`] = `
+<Pagination
+  aria-label="Page navigation"
+  listTag="ul"
+  style={
+    Object {
+      "flexWrap": "wrap",
+      "marginTop": 20,
+    }
+  }
+  tag="nav"
+>
+  <PaginationItem
+    disabled={true}
+    tag="li"
+  >
+    <PaginationLink
+      onClick={[Function]}
+      previous={true}
+      tag="a"
+    />
+  </PaginationItem>
+  <PaginationItem
+    active={true}
+    key="0_id"
+    tag="li"
+  >
+    <PaginationLink
+      onClick={[Function]}
+      tag="a"
+    >
+      1
+    </PaginationLink>
+  </PaginationItem>
+  <PaginationItem
+    disabled={true}
+    tag="li"
+  >
+    <PaginationLink
+      next={true}
+      onClick={[Function]}
+      tag="a"
+    />
+  </PaginationItem>
+</Pagination>
+`;

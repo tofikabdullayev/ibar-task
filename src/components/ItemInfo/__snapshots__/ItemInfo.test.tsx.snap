@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the component 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <FormGroup
+    row={true}
+    tag="div"
+  >
+    <Label
+      for="name"
+      sm={2}
+      tag="label"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      Name:
+    </Label>
+    <Col
+      sm={10}
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <Input
+        disabled={true}
+        id="name"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </Col>
+  </FormGroup>
+  <FormGroup
+    row={true}
+    tag="div"
+  >
+    <Label
+      for="email"
+      sm={2}
+      tag="label"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      Email:
+    </Label>
+    <Col
+      sm={10}
+      tag="div"
+      widths={
+        Array [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+        ]
+      }
+    >
+      <Input
+        disabled={true}
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </Col>
+  </FormGroup>
+</form>
+`;

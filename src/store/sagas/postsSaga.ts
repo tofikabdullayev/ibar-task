@@ -34,7 +34,7 @@ export interface GetPostActionInterface {
 const getFilterText = (state: { postsState: PostsState }) =>
   state.postsState.filterText;
 
-function* onGetPosts({ userId, page }: GetPostActionInterface) {
+export function* onGetPosts({ userId, page }: GetPostActionInterface) {
   try {
     const filterText = yield select(getFilterText);
     let response = yield call(getPosts, { userId, page, title: filterText });
