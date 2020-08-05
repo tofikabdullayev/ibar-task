@@ -2,38 +2,46 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Input, FormGroup, Col, Label, Button } from 'reactstrap';
 
 interface Props {
-  name: string;
-  email: string;
+  fields: [string, string];
+  isUser: boolean;
   isEditMode: boolean;
   onSubmit: (name: string, email: string) => void;
   onCancel: () => void;
 }
 
-const UserInfo = ({ name, email, isEditMode, onSubmit, onCancel }: Props) => {
-  const [userName, setUserName] = useState(name);
-  const [userEmail, setUserEmail] = useState(email);
+const ItemInfo = ({
+  fields,
+  isUser,
+  isEditMode,
+  onSubmit,
+  onCancel,
+}: Props) => {
+  const [field1, setField1] = useState(fields[0]);
+  const [field2, setField2] = useState(fields[1]);
 
   const onCancelEdit = () => {
-    setUserEmail(email);
-    setUserName(name);
+    setField2(fields[1]);
+    setField1(fields[0]);
     onCancel();
   };
 
   const onSubmitEdit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(userName, userEmail);
+    onSubmit(field1, field2);
   };
   return (
     <form onSubmit={onSubmitEdit}>
       <FormGroup row>
-        <Label for="name" sm={2}>
-          Name:
-        </Label>
-        <Col sm={10}>
+        {isUser && (
+          <Label for="name" sm={2}>
+            Name:
+          </Label>
+        )}
+        <Col sm={isUser ? 10 : 12}>
           <Input
-            value={userName}
+            value={field1}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setUserName(e.target.value)
+              setField1(e.target.value)
             }
             disabled={!isEditMode}
             id="name"
@@ -41,14 +49,18 @@ const UserInfo = ({ name, email, isEditMode, onSubmit, onCancel }: Props) => {
         </Col>
       </FormGroup>
       <FormGroup row>
-        <Label for="email" sm={2}>
-          Email:
-        </Label>
-        <Col sm={10}>
+        {isUser && (
+          <Label for="email" sm={2}>
+            Email:
+          </Label>
+        )}
+
+        <Col sm={isUser ? 10 : 12}>
           <Input
-            value={userEmail}
+            type={isUser ? 'text' : 'textarea'}
+            value={field2}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setUserEmail(e.target.value)
+              setField2(e.target.value)
             }
             disabled={!isEditMode}
           />
@@ -78,4 +90,4 @@ const UserInfo = ({ name, email, isEditMode, onSubmit, onCancel }: Props) => {
   );
 };
 
-export default UserInfo;
+export default ItemInfo;

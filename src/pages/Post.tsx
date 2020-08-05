@@ -1,9 +1,10 @@
-import React, { useState, ChangeEvent, useEffect, FormEvent } from 'react';
-import { Input, Button, ButtonGroup, Spinner, Alert } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, ButtonGroup, Spinner, Alert } from 'reactstrap';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost, editPost, deletePost } from '../store/actions/post';
 import { PostState } from '../store/reducers/post';
+import ItemInfo from '../components/ItemInfo';
 
 interface RouteParams {
   userId: string;
@@ -37,9 +38,12 @@ const Post = (props: Props) => {
         <Spinner />
       ) : (
         <>
-          <PostInfo
-            title={selectedPost.post.result.title}
-            body={selectedPost.post.result.body}
+          <ItemInfo
+            fields={[
+              selectedPost.post.result.title,
+              selectedPost.post.result.body,
+            ]}
+            isUser={false}
             isEditMode={editMode}
             onSubmit={onEdit}
             onCancel={() => setEditMode(false)}
@@ -59,87 +63,13 @@ const Post = (props: Props) => {
           )}
           {selectedPost.deletedMessage && (
             <Alert color="success">
-              {selectedPost.deletedMessage} <Link to="/">Back</Link>
+              {selectedPost.deletedMessage}{' '}
+              <Link to={`/users/${props.match.params.userId}/posts`}>Back</Link>
             </Alert>
           )}
         </>
       )}
     </div>
-  );
-};
-
-interface PostInfoProps {
-  title: string;
-  body: string;
-  isEditMode: boolean;
-  onSubmit: (title: string, body: string) => void;
-  onCancel: () => void;
-}
-export const PostInfo = ({
-  title,
-  body,
-  isEditMode,
-  onSubmit,
-  onCancel,
-}: PostInfoProps) => {
-  const [editedTitle, setTitle] = useState(title);
-  const [editedBody, setBody] = useState(body);
-
-  const onCancelEdit = () => {
-    setTitle(title);
-    setBody(body);
-    onCancel();
-  };
-
-  const onSubmitEdit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onSubmit(editedTitle, editedBody);
-  };
-
-  return (
-    <form onSubmit={onSubmitEdit}>
-      <p>
-        <Input
-          type="text"
-          value={editedTitle}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setTitle(e.target.value)
-          }
-          disabled={!isEditMode}
-        />
-      </p>
-      <p>
-        <Input
-          type="textarea"
-          value={editedBody}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setBody(e.target.value)
-          }
-          style={{ minHeight: 200 }}
-          disabled={!isEditMode}
-        />
-      </p>
-      {isEditMode && (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: 10,
-          }}
-        >
-          <Button color="primary" style={{ width: '100%', marginRight: 5 }}>
-            Submit
-          </Button>
-          <Button
-            color="secondary"
-            style={{ width: '100%', marginLeft: 5 }}
-            onClick={onCancelEdit}
-          >
-            Cancel
-          </Button>
-        </div>
-      )}
-    </form>
   );
 };
 

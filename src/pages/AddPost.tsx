@@ -1,5 +1,5 @@
 import React from 'react';
-import { PostInfo } from './Post';
+import PostInfo from '../components/ItemInfo';
 import { RouteComponentProps } from 'react-router-dom';
 import { addPost } from '../store/actions/post';
 import { useDispatch } from 'react-redux';
@@ -21,8 +21,8 @@ const AddPost = (props: Props) => {
   return (
     <div>
       <PostInfo
-        title=""
-        body=""
+        fields={['', '']}
+        isUser={false}
         isEditMode={true}
         onSubmit={onAdd}
         onCancel={onCancel}

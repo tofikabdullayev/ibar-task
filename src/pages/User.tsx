@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Spinner, Alert } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, deleteUser, editUser } from '../store/actions/user';
 import { UserState } from '../store/reducers/user';
-import UserInfo from '../components/UserInfo';
+import UserInfo from '../components/ItemInfo';
 
 interface RouteParams {
   userId: string;
@@ -41,12 +41,13 @@ const User = (props: Props) => {
       ) : (
         <>
           <UserInfo
-            name={
+            fields={[
               userState.user.result.first_name +
-              ' ' +
-              userState.user.result.last_name
-            }
-            email={userState.user.result.email}
+                ' ' +
+                userState.user.result.last_name,
+              userState.user.result.email,
+            ]}
+            isUser={true}
             isEditMode={editMode}
             onSubmit={onEdit}
             onCancel={() => setEditMode(false)}

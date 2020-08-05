@@ -1,5 +1,5 @@
 import React from 'react';
-import UserInfo from '../components/UserInfo';
+import UserInfo from '../components/ItemInfo';
 import { RouteComponentProps } from 'react-router-dom';
 import { addUser } from '../store/actions/user';
 import { useDispatch } from 'react-redux';
@@ -17,8 +17,8 @@ const AddUser = (props: Props) => {
   return (
     <div>
       <UserInfo
-        name=""
-        email=""
+        fields={['', '']}
+        isUser={true}
         isEditMode={true}
         onSubmit={onAdd}
         onCancel={onCancel}
